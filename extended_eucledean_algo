@@ -1,0 +1,22 @@
+def extended_euclidean(a, b):
+    if b == 0:
+        return a, 1, 0
+
+    gcd, x_prev, y_prev = extended_euclidean(b, a % b)
+    x = y_prev
+    y = x_prev - (a // b) * y_prev
+    return gcd, x, y
+
+
+# Get user inputs
+a = int(input("Enter the number (a): "))
+modulus = int(input("Enter the modulus: "))
+
+gcd, x, y = extended_euclidean(a, modulus)
+
+if gcd == 1:
+    inverse = x % modulus
+    print("Extended Euclidean Algorithm:")
+    print(f"Inverse of {a} modulo {modulus} is: {inverse}")
+else:
+    print(f"{a} does not have an inverse modulo {modulus}.")
