@@ -1,0 +1,33 @@
+def calculate_modular_exponentiation(base, exponent, modulus):
+    result = 1
+    base = base % modulus
+
+    while exponent > 0:
+        if exponent % 2 == 1:
+            result = (result * base) % modulus
+        exponent = exponent // 2
+        base = (base * base) % modulus
+
+    return result
+
+
+# Get user inputs
+primitive_root = int(input("Enter the primitive root: "))
+p = int(input("Enter the value of p: "))
+private_key_user1 = int(input("Enter the private key for User 1: "))
+private_key_user2 = int(input("Enter the private key for User 2: "))
+
+# Calculate the public keys
+public_key_user1 = calculate_modular_exponentiation(primitive_root, private_key_user1, p)
+public_key_user2 = calculate_modular_exponentiation(primitive_root, private_key_user2, p)
+
+# Calculate the shared secret keys
+shared_key_user1 = calculate_modular_exponentiation(public_key_user2, private_key_user1, p)
+shared_key_user2 = calculate_modular_exponentiation(public_key_user1, private_key_user2, p)
+
+# Ensure that the shared keys match
+if shared_key_user1 == shared_key_user2:
+    shared_key = shared_key_user1
+    print("Symmetric Key:", shared_key)
+else:
+    print("Error: Symmetric key generation failed.")
