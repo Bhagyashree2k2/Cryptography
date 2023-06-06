@@ -1,0 +1,33 @@
+def hash(message):
+    hash_value = sum(ord(char) for char in message)  # Sum the ASCII values of each character
+    return hash_value
+
+# Define your custom hash function
+def custom_hash(message):
+    # Implement your custom hash logic here
+    hash_value = hash(message)  # Replace this with your custom hash function
+    return hash_value
+  
+
+# Get user input for the original message
+original_message = input("Enter the original message: ")
+
+# Compute the hash of the original message
+original_hash = custom_hash(original_message)
+
+print("Original Message:", original_message)
+print("Original Hash:", original_hash)
+
+# Get user input for the received message
+received_message = input("Enter the received message: ")
+
+# Compute the hash of the received message
+received_hash = custom_hash(received_message)
+
+print("Received Message:", received_message)
+print("Received Hash:", received_hash)
+
+# Compare the hashes
+if received_hash == original_hash:
+    print("Message integrity verified. The received message is not modified.")
+else:print("Message integrity compromised. The received message has been modified.")
